@@ -35,7 +35,7 @@ const Vegetable = db.define('vegetables', {
   },
   planted_on: {
     type: Sequelize.DATE,
-    allowNull: false
+    allowNull: true 
   }
 })
 

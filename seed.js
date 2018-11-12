@@ -1,6 +1,6 @@
-const { db } = require('./models');
+const { db, Gardener, Vegetable } = require('./models');
 
-db.sync({force: true})
+db.sync()
   .then( () => {
     console.log('Database is synced!')
   })
@@ -8,6 +8,25 @@ db.sync({force: true})
     console.log('Disaster! Something went wrong!');
     console.log(err);
   })
-  .finally( () => {
-    db.close()
-  });
+  //.finally( () => {
+  //  db.close()
+  //});
+
+Gardener.bulkCreate([{
+  name: 'Jing',
+  age: 30,
+  favoriteVegetableId: 1
+}, {
+  name: 'McRae',
+  age: 37,
+  favoriteVegetableId: 3
+}])
+.then (() => {
+  return Gardener.findAll();
+})
+.then ((gardeners) => {
+  console.log(gardeners)
+})
+.catch((err) => {
+  console.log(err);
+});
